@@ -36,6 +36,13 @@ var x = """ \""" """
 "escaped quote \" foo"
 #              ^^ constant.character.escape.gdscript
 
+"\\"
+#^^ constant.character.escape.gdscript
+#  ^ punctuation.definition.string.end.gdscript
+'\\'
+#^^ constant.character.escape.gdscript
+#  ^ punctuation.definition.string.end.gdscript
+
 
 123  # this actually won't compile outside a function
 # <- constant.numeric.integer.gdscript
@@ -194,3 +201,14 @@ enum {X, Y,Z}
 #        ^    meta.mapping.key.gdscript entity.name.enum.gdscript
 #         ^   punctuation.separator.mapping.key-value.gdscript
 #           ^ punctuation.section.mapping.end.gdscript
+enum TEST {
+    A, B, C
+#   ^       meta.mapping.key.gdscript entity.name.enum.gdscript
+#      ^    meta.mapping.key.gdscript entity.name.enum.gdscript
+#         ^ meta.mapping.key.gdscript entity.name.enum.gdscript
+}
+
+  match state:
+# ^^^^^ keyword.control.flow.gdscript
+    STATE.INTRO:
+        print("intro")
